@@ -1,5 +1,6 @@
 def user_entity(term) -> dict:
     return {
+        "id": str(term["_id"]),
         "name": str(term["name"]),
         "lastname": str(term["lastname"]),
         "identification": term["identification"],

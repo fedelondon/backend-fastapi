@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-
+from bson import objectid
 from config.db import conn
 from models.userModel import User
 from schemas.userSchema import user_entity, users_entity
@@ -12,9 +12,9 @@ async def find_all_users():
     return users_entity(conn.prueba.user.find())
 
 
-@user.get("/user/{:id}")
-async def find_user():
-    return {"message": "Hello user"}
+@user.get("/user/{id}")
+async def find_user(id: str):
+    return user_entity(conn.prueba.user.find_one({"_id": objectid(id)}))
 
 
 @user.post("/user")
